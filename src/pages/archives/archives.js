@@ -4,19 +4,21 @@ import {
   ImageIconCard,
   AddImageButton,
   ArchivesCarrousel,
+  IconCard,
 } from "./styles";
 import { Image, ScrollView, Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
+import { launchImageLibraryAsync } from "expo-image-picker";
 
 const Archives = () => {
-  const [uploadsList, setUploadsList] = useState([1, 2, 3, 4, 5, 6, 7]);
+  const [uploadsList, setUploadsList] = useState([]);
 
   const HandleImage = async () => {
-    result = await ImagePicker.launchImageLibraryAsync({});
-
-    console.log(result);
-
+    try {
+      result = await launchImageLibraryAsync({});
+    } catch {
+      alert("Não foi possível buscar uma imagem");
+    }
     if (!result.cancelled) {
       setUploadsList([...uploadsList, result.uri]);
     }
@@ -26,12 +28,12 @@ const Archives = () => {
     <ArchivesContainer>
       <ScrollView>
         <ArchivesCarrousel>
-          <AddImageButton onPress={async () => HandleImage}>
+          <AddImageButton onPress={async () => HandleImage()}>
             <Feather name="plus" size={40} color="gray" />
           </AddImageButton>
           {uploadsList.map((imagem) => (
             <ImageIconCard key={imagem}>
-              <Text>{imagem}</Text>
+              <IconCard source={{ uri: imagem }} />
             </ImageIconCard>
           ))}
         </ArchivesCarrousel>

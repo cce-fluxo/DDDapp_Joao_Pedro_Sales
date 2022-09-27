@@ -23,9 +23,7 @@ const Signup = ({ navigation }) => {
 
   const { signup } = useAuth();
 
-  const handleSignup = () => {
-    navigation.navigate("Login");
-    return;
+  const handleSignup = async () => {
     if (!email | !senhaConf | !senha) {
       setError("Preencha todos os campos");
       return;
@@ -34,7 +32,7 @@ const Signup = ({ navigation }) => {
       return;
     }
 
-    const res = signup(email, senha);
+    const res = await signup(email, senha);
 
     if (res) {
       setError(res);

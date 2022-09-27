@@ -56,3 +56,8 @@ export const BottomPart = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const TituloCollab = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+`;

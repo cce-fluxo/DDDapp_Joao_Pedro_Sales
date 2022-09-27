@@ -8,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 import Login from "./src/pages/login/login";
 import Signup from "./src/pages/signup/signup";
 import EsqueciSenha from "./src/pages/esqueci/esqueciSenha";
+import { AuthProvider } from "./src/contexts/auth";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,42 +20,44 @@ const Private = ({ Item }) => {
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <StatusBar />
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Cadastro"
-            component={Signup}
-            options={{
-              title: "",
-              headerShown: true,
-            }}
-          />
-          <Stack.Screen
-            name="Esqueci"
-            component={EsqueciSenha}
-            options={{
-              title: "",
-              headerShown: true,
-            }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={Routes}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <StatusBar />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Cadastro"
+              component={Signup}
+              options={{
+                title: "",
+                headerShown: true,
+              }}
+            />
+            <Stack.Screen
+              name="Esqueci"
+              component={EsqueciSenha}
+              options={{
+                title: "",
+                headerShown: true,
+              }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={Routes}
+              options={{
+                headerShown: false,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }

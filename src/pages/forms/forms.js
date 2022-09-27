@@ -7,6 +7,7 @@ import {
   ListaColaboradores,
   TopPart,
   BottomPart,
+  TituloCollab,
 } from "./styles";
 import {
   Titulo,
@@ -56,7 +57,7 @@ const Forms = () => {
   return (
     <FormsContainer>
       <TopPart>
-        <Titulo>Todos os Colaboradores:</Titulo>
+        <TituloCollab>Todos os Colaboradores:</TituloCollab>
         <ListaColaboradores>
           {listaColaboradores.map((colaborador) => (
             <Text

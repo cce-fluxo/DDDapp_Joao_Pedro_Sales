@@ -17,6 +17,7 @@ import {
 
 import Logo from "../../assets/logo.png";
 import useAuth from "../../hooks/useAuth";
+import { AuthContext } from "../../contexts/auth";
 
 const Login = ({ navigation }) => {
   const { signin } = useAuth();
@@ -25,15 +26,14 @@ const Login = ({ navigation }) => {
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
-    navigation.navigate("Home");
-    return;
+  const handleLogin = async () => {
+    // navigation.navigate("Home");
     if (!email | !senha) {
       setError("Preencha todos os campos");
       return;
     }
 
-    const res = signin(email, senha);
+    const res = await signin(email, senha);
 
     if (res) {
       setError(res);
